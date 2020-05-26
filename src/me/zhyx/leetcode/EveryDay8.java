@@ -57,6 +57,7 @@ public class EveryDay8 {
         return ans.stream().mapToInt(Integer::valueOf).toArray();
     }
     public void tree(TreeNode root) {
+
         if(root!=null){
             tree(root.left);
             //二叉树的递归遍历类似于数组的for each循环，你必须使用一个变量记录之前的遍历结果，而不能像for i 那样可以通过下标找到当前元素的前面是谁
@@ -82,5 +83,6 @@ public class EveryDay8 {
     }
 
     public static void main(String[] args) {
+
     }
 }

@@ -23,7 +23,6 @@ public class EveryDay11 {
     public ListNode removeNthFromEnd(ListNode listNode,int n){
         ListNode dunmy=new ListNode(0);
         dunmy.next=listNode;
-        int length=0;
         ListNode firstPos=dunmy;
         ListNode secondPos=dunmy;
         /**
