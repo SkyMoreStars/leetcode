@@ -46,7 +46,14 @@ public class EveryDay19 {
         nodeList2.next=nodeList3;
         NodeList nodeList4 = new NodeList(7);
         nodeList3.next=nodeList4;
-        everyDay19.mergeTowLinked(nodeList1,nodeList1);
+        NodeList nodeList21 = new NodeList(2);
+        NodeList nodeList22 = new NodeList(4);
+        nodeList21.next=nodeList22;
+        NodeList nodeList23 = new NodeList(6);
+        nodeList22.next=nodeList23;
+        NodeList nodeList24 = new NodeList(8);
+        nodeList23.next=nodeList24;
+        everyDay19.mergeTowLinked(nodeList1,nodeList21);
         while (nodeList1!=null){
             System.out.println(nodeList1.i+",");
             nodeList1=nodeList1.next;
