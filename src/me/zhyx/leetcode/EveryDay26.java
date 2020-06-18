@@ -29,6 +29,6 @@ public class EveryDay26 {
         if(t1.val!=t2.val){
             return false;
         }
-        return isSameTree(t1.right,t2.right)&&isSameTree(t1.left,t2.right);
+        return isSameTree(t1.right,t2.right)&&isSameTree(t1.left,t2.left);
     }
 }
