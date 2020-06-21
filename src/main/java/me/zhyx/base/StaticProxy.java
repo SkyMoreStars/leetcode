@@ -6,7 +6,9 @@ package me.zhyx.base;
  **/
 public class StaticProxy {
     public static void main(String[] args) {
-        MerryCompany merryCompany = new MerryCompany(new You());
-        merryCompany.wedding();
+        Merry merry=()->{
+            System.out.println("i will wedding！");
+        };
+        merry.wedding();
     }
 }

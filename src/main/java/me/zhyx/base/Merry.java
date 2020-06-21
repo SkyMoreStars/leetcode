@@ -5,6 +5,7 @@ package me.zhyx.base;
  * @date: 2020-06-20 13:55
  *  静态代理demo
  **/
+@FunctionalInterface
 public interface Merry {
     /**
      * 结婚方法

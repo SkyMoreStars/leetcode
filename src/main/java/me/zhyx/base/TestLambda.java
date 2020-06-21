@@ -46,14 +46,12 @@ public class TestLambda {
         /**
          * lambda表达式
          */
-        ILike like4=(name)->{
-            System.out.println(name);
-        };
-        like4.lambda("i am zhyx");
+        ILike like4=(name,tets)->System.out.println(name+tets);
+        like4.lambda("i am zhyx","sfasdf");
     }
 }
 interface ILike{
-     void lambda(String name);
+     void lambda(String name,String test);
 }
 
 /**
