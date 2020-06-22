@@ -1,6 +1,5 @@
 package me.zhyx.base;
 
-import sun.jvm.hotspot.oops.BranchData;
 
 import java.util.Random;
 
