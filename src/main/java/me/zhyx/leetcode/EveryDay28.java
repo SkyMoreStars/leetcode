@@ -1,6 +1,9 @@
 package me.zhyx.leetcode;
 
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @auther zhyx
@@ -38,6 +41,7 @@ public class EveryDay28 {
     }
 
     public static void main(String[] args) {
+        ExecutorService service = Executors.newWorkStealingPool();
         EveryDay28 everyDay28 = new EveryDay28();
         System.out.println(everyDay28.getMaxDifferencePrice(new int[]{6, 4, 5, 1, 3, 1, 4}));
     }
