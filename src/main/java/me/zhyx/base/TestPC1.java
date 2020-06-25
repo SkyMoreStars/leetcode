@@ -1,5 +1,8 @@
 package me.zhyx.base;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @author: yx.zh
  * @date: 2020-06-21 09:31
@@ -7,6 +10,7 @@ package me.zhyx.base;
  **/
 public class TestPC1 {
     public static void main(String[] args) {
+        ExecutorService executorService= Executors.newCachedThreadPool();
         TV tv = new TV();
         new Player(tv).start();
         new Watcher(tv).start();
