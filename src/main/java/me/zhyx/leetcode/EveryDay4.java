@@ -13,7 +13,7 @@ public class EveryDay4 {
         b^=a;
         a^=b;
         System.out.println(a+"   "+ b);
-        System.out.println(reverseVowels("leetcode"));
+        System.out.println(reverseVowels("aeiou"));
     }
     /**
      * 编写一个函数，以字符串作为输入，反转该字符串中的元音字母。
@@ -37,9 +37,11 @@ public class EveryDay4 {
         while (l<r){
             if(l<length&&!isVowel(str[l])){
                 l++;
+                continue;
             }
             if(r<length&&!isVowel(str[r])){
                 r--;
+                continue;
             }
 
             if(l>=r){
