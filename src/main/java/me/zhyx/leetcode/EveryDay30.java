@@ -9,7 +9,7 @@ public class EveryDay30 {
     /**
      * 求一棵二叉树是否为平衡二叉树。
      */
-    static class TreeNode{
+    private static class TreeNode{
         TreeNode left;
         TreeNode right;
         int val;
