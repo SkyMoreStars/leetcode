@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  **/
 public class TreeNode {
     private String data;
-    private List<TreeNode> children =new LinkedList<>();
+    public List<TreeNode> children =new LinkedList<>();
 
     public TreeNode(String data) {
         this.data = data;
@@ -28,7 +28,8 @@ final class TreeUtil{
     }
 
     public static void main(String[] args) {
-        String text="1\n"
+        String text=
+                "1\n"
                 +"\t1.1\n"
                 +"\t\t1.1.1\n"
                 +"\t\t1.1.2\n"
@@ -43,21 +44,43 @@ final class TreeUtil{
      * 假设text始终合法（非空且合乎规则）。
      */
     public static List<TreeNode> stringToTree(final String text) {
+
+
         //TODO: 实现此方法
         String[] treeNodeStr = text.split("\n");
-        List<String> rootNode= findRootNode(treeNodeStr);
-
-
+        List<TreeNode> rootNode= findChildren(treeNodeStr);
+        return rootNode;
     }
 
-    private static List<String> findRootNode(String[] treeNodeStr) {
-        ArrayList<String> rootNode = new ArrayList<>();
+    private static List<TreeNode> findChildren(String[] treeNodeStr) {
+        ArrayList<TreeNode> rootTreeNodes = new ArrayList<TreeNode>();
+        TreeNode currentTreeNode = new TreeNode("");
+
+        for (String s : treeNodeStr) {
+
+            if(s.indexOf("\t")>1){
+                //判断缩进的大小，变换层级关系。递增则子级，变小则父级。
+                currentTreeNode.getChildren().add(new TreeNode(s.substring(s.indexOf(".")+1)));
+            }else {
+                TreeNode rootTreeNode = new TreeNode(s);
+                rootTreeNode.children=new ArrayList<>();
+                rootTreeNodes.add(rootTreeNode);
+                currentTreeNode=rootTreeNode;
+            }
+        }
+
+        return null;
+    }
+
+    private static List<TreeNode> findRootNode(String[] treeNodeStr) {
+        ArrayList<TreeNode> rootNode = new ArrayList<>();
         Arrays.stream(treeNodeStr).forEach(item->{
             if(!item.contains("\t")){
-                rootNode.add(item);
+                TreeNode treeNode = new TreeNode(item);
+                rootNode.add(treeNode);
             }
         });
-
+        return rootNode;
     }
 
     /**
@@ -66,6 +89,7 @@ final class TreeUtil{
      */
     public static String treeToString(List<TreeNode> tree) {
         //TODO: 实现此方法
+        return null;
     }
 
     /**
@@ -76,6 +100,7 @@ final class TreeUtil{
             List<TreeNode> tree,
             Predicate<Optional<String>> action) {
         //TODO: 实现此方法
+        return null;
     }
 
 }
