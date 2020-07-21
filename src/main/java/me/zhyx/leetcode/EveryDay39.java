@@ -8,6 +8,7 @@ package me.zhyx.leetcode;
 public class EveryDay39 {
     /**
      * 股票买卖的最佳时机，判断最大利润。
+     *
      */
 
     public int maxProfit(int []prices){
@@ -29,8 +30,22 @@ public class EveryDay39 {
         return maxprofit;
     }
 
+    public int maxProfit1(int [] prices){
+        int maxprofit=0;
+        int i=0;
+        while (i<prices.length-1){
+            if(prices[i]<prices[i+1]){
+                maxprofit+=prices[i+1]-prices[i];
+            }
+            i++;
+        }
+        return maxprofit;
+
+    }
+
     public static void main(String[] args) {
         EveryDay39 everyDay39 = new EveryDay39();
-        System.out.println(everyDay39.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+
+        System.out.println(everyDay39.maxProfit1(new int[]{7, 1, 5, 3, 6, 4}));
     }
 }
