@@ -1,6 +1,10 @@
 package me.zhyx.base.sortexcuse;
 
+import me.zhyx.base.ReentantLockDemo;
+
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @auther zhyx
@@ -69,11 +73,116 @@ public class SortThreadDemo {
         }
     }
 
-    public static void main(String[] args) {
-        countDownLatchMethodExcuse();
+    public static void main(String[] args) throws InterruptedException {
+//        countDownLatchMethodExcuse();
         
 //        joinMethodExcuse();
 
+//        reentrantLockExcuse();
+        
+            waitAndNotifyExcuse();
+    }
+
+    /**
+     * 负责打印数字
+     */
+    private static class ThreadA implements Runnable{
+        private int [] arr={1,2,3,4,5,6,7,8,9};
+        Object lockObj;
+
+        public ThreadA(Object lockObj) {
+            this.lockObj = lockObj;
+        }
+
+        @Override
+        public void run() {
+            synchronized (lockObj){
+                for (int i : arr) {
+                    lockObj.notify();
+                    System.out.println(Thread.currentThread().getName()+":"+i);
+                    try {
+                        lockObj.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                lockObj.notify();
+            }
+
+        }
+    }
+
+    /**
+     * 复杂打印字母
+     */
+    private static class ThreadB implements Runnable{
+        private char[] letters={'A','B','C','D','E','F','G','H','I'};
+        Object lockObj;
+
+        public ThreadB(Object lockObj) {
+            this.lockObj = lockObj;
+        }
+
+        @Override
+        public void run() {
+            synchronized (lockObj){
+                for (char letter : letters) {
+                    lockObj.notify();
+                    System.out.println(Thread.currentThread().getName()+":"+letter);
+                    try {
+                        lockObj.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                lockObj.notify();
+            }
+
+        }
+    }
+    private static void waitAndNotifyExcuse() throws InterruptedException {
+        Object o = new Object();
+        new Thread(new ThreadA(o), "线程A").start();
+        Thread.sleep(1);
+        new Thread(new ThreadB(o), "线程B").start();
+    }
+
+    private static class ThreadReentrantLock extends Thread{
+        ReentrantLock reentrantLock;
+
+        public ThreadReentrantLock(String name, ReentrantLock reentrantLock) {
+            super(name);
+            this.reentrantLock = reentrantLock;
+        }
+
+        @Override
+        public void run() {
+            reentrantLock.lock();
+            try {
+                System.out.println(Thread.currentThread().getName()+"开始执行");
+            }catch (Exception e){
+
+            }finally {
+                reentrantLock.unlock();
+            }
+        }
+    }
+    private static void reentrantLockExcuse() {
+        ReentrantLock reentrantLock = new ReentrantLock(true);
+        ArrayList<ThreadReentrantLock> threadReentrantLockArrayList = new ArrayList<ThreadReentrantLock>();
+        for(int i=0;i<10;i++){
+            ThreadReentrantLock threadReentrantLock = new ThreadReentrantLock("线程"+i,reentrantLock);
+            threadReentrantLockArrayList.add(threadReentrantLock);
+        }
+
+        threadReentrantLockArrayList.forEach((item)->{
+            item.start();
+            try {
+                item.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private static void countDownLatchMethodExcuse() {
