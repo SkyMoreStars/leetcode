@@ -33,9 +33,9 @@ class Player extends Thread{
             try {
 
                 if(i%2==0){
-                    tv.paly("快乐大本营！");
+                    tv.play("快乐大本营！");
                 }else {
-                    tv.paly("广告！");
+                    tv.play("广告！");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -78,7 +78,7 @@ class TV {
 
     String voice;
     boolean flag=true;
-    public synchronized void paly(String voice) throws InterruptedException {
+    public synchronized void play(String voice) throws InterruptedException {
         if(!flag){
             wait();
         }
