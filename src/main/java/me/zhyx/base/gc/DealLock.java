@@ -7,14 +7,15 @@ package me.zhyx.base.gc;
  */
 public class DealLock {
 
-    private static class A{
-
-    }
-    private static class B{
+    private static class A {
 
     }
 
-    private static class Thread1 extends Thread{
+    private static class B {
+
+    }
+
+    private static class Thread1 extends Thread {
         private A a;
         private B b;
 
@@ -26,10 +27,10 @@ public class DealLock {
 
         @Override
         public void run() {
-            synchronized (A.class){
+            synchronized (A.class) {
                 try {
                     Thread.sleep(199);
-                    synchronized (B.class){
+                    synchronized (B.class) {
 
                     }
                 } catch (InterruptedException e) {
@@ -39,7 +40,7 @@ public class DealLock {
         }
     }
 
-    private static class Thread2 extends Thread{
+    private static class Thread2 extends Thread {
         private A a;
         private B b;
 
@@ -51,10 +52,10 @@ public class DealLock {
 
         @Override
         public void run() {
-            synchronized (B.class){
+            synchronized (B.class) {
                 try {
                     Thread.sleep(199);
-                    synchronized (A.class){
+                    synchronized (A.class) {
 
                     }
                 } catch (InterruptedException e) {
@@ -67,8 +68,8 @@ public class DealLock {
     public static void main(String[] args) {
         A a = new A();
         B b = new B();
-        new Thread1("线程1",a,b).start();
-        new Thread2("线程2",a,b).start();
+        new Thread1("线程1", a, b).start();
+        new Thread2("线程2", a, b).start();
 
     }
 }

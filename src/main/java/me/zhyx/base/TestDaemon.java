@@ -14,23 +14,24 @@ public class TestDaemon {
         new Thread(youSelf).start();
     }
 }
-class God implements Runnable{
+
+class God implements Runnable {
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             System.out.println("上帝保佑着你！");
         }
     }
 }
 
-class YouSelf implements Runnable{
+class YouSelf implements Runnable {
 
     @Override
     public void run() {
         System.out.println("出生开始努力活着！");
         for (int i = 0; i < 36500; i++) {
-            System.out.println("活着的第"+i+"天");
+            System.out.println("活着的第" + i + "天");
         }
         System.out.println("人生短短不过36500天，再见来世界！");
     }

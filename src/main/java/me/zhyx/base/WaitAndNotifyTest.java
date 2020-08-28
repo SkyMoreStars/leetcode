@@ -9,18 +9,20 @@ import java.util.List;
  **/
 public class WaitAndNotifyTest {
     List list = new ArrayList();
-    public void add(Object o){
+
+    public void add(Object o) {
         list.add(o);
     }
-    public int size(){
+
+    public int size() {
         return list.size();
     }
 
     public static void main(String[] args) {
         WaitAndNotifyTest waitAndNotifyTest = new WaitAndNotifyTest();
-        final Object o=new Object();
-        Thread monitorT = new Thread(()->{
-            synchronized (o){
+        final Object o = new Object();
+        Thread monitorT = new Thread(() -> {
+            synchronized (o) {
                 try {
                     System.out.println("监控线程启动！");
                     o.wait();
@@ -32,10 +34,10 @@ public class WaitAndNotifyTest {
             }
         });
 
-        Thread excuseT=new Thread(()->{
-            synchronized (o){
+        Thread excuseT = new Thread(() -> {
+            synchronized (o) {
                 for (int i = 0; i < 10; i++) {
-                    if(waitAndNotifyTest.size()==5){
+                    if (waitAndNotifyTest.size() == 5) {
                         o.notify();
                         try {
                             o.wait();

@@ -8,12 +8,12 @@ package me.zhyx.base;
 public class ThreadSwapTest {
 
     public static void main(String[] args) {
-        final Object a=new Object();
+        final Object a = new Object();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int j = 0; j < 100; j++) {
-                synchronized (a){
-                    System.out.println(Thread.currentThread().getName()+"打印数字"+j);
+                synchronized (a) {
+                    System.out.println(Thread.currentThread().getName() + "打印数字" + j);
                     try {
                         a.wait();
                     } catch (InterruptedException e) {
@@ -23,11 +23,11 @@ public class ThreadSwapTest {
 
 
             }
-        },"A").start();
-        new Thread(()->{
-            for(int j=0;j<100;j++){
-                synchronized (a){
-                    System.out.println(Thread.currentThread().getName()+"打印字母"+(char)(j));
+        }, "A").start();
+        new Thread(() -> {
+            for (int j = 0; j < 100; j++) {
+                synchronized (a) {
+                    System.out.println(Thread.currentThread().getName() + "打印字母" + (char) (j));
                     a.notify();
                 }
                 try {
@@ -36,7 +36,7 @@ public class ThreadSwapTest {
                     e.printStackTrace();
                 }
             }
-        },"B").start();
+        }, "B").start();
     }
 
 

@@ -36,14 +36,17 @@ public class MyLock implements Lock {
             return false;
         }
     }
+
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
         return myAbstractQueuedSynchronized.tryAcquireNanos(1, TimeUnit.NANOSECONDS.convert(time, unit));
     }
+
     @Override
     public void unlock() {
         myAbstractQueuedSynchronized.tryRelease(1);
     }
+
     @Override
     public Condition newCondition() {
         return myAbstractQueuedSynchronized.new ConditionObject();

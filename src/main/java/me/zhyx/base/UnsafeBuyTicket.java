@@ -7,35 +7,38 @@ package me.zhyx.base;
 public class UnsafeBuyTicket {
     public static void main(String[] args) {
         BuyTicket buyTicket = new BuyTicket();
-        new Thread(buyTicket,"苦逼的你").start();
-        new Thread(buyTicket,"牛逼的你们").start();
-        new Thread(buyTicket,"可恶的黄牛党").start();
+        new Thread(buyTicket, "苦逼的你").start();
+        new Thread(buyTicket, "牛逼的你们").start();
+        new Thread(buyTicket, "可恶的黄牛党").start();
 
     }
 }
-class BuyTicket implements Runnable{
+
+class BuyTicket implements Runnable {
     //票
-    private int ticketNum=10;
-    private boolean flag=true;
+    private int ticketNum = 10;
+    private boolean flag = true;
+
     @Override
     public void run() {
         //买票
-        while (flag){
+        while (flag) {
             try {
 
-                    buy();
+                buy();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
+
     public synchronized void buy() throws InterruptedException {
         Thread.sleep(100);
-        if(this.ticketNum<=0){
-            flag=false;
+        if (this.ticketNum <= 0) {
+            flag = false;
             return;
         }
         //买票
-        System.out.println(Thread.currentThread().getName()+"拿到第"+ticketNum--+"票");
+        System.out.println(Thread.currentThread().getName() + "拿到第" + ticketNum-- + "票");
     }
 }

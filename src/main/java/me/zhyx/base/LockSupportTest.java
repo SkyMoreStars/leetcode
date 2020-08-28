@@ -10,14 +10,18 @@ import java.util.concurrent.locks.LockSupport;
  **/
 public class LockSupportTest {
     List list = new ArrayList();
-    public void add(Object o){
+
+    public void add(Object o) {
         list.add(o);
     }
-    public int size(){
+
+    public int size() {
         return list.size();
     }
-   static Thread monitorT;
-   static Thread excuseT;
+
+    static Thread monitorT;
+    static Thread excuseT;
+
     public static void main(String[] args) {
         LockSupportTest lockSupportTest = new LockSupportTest();
         monitorT = new Thread(() -> {
@@ -26,11 +30,11 @@ public class LockSupportTest {
             System.out.println("监控线程结束！");
             LockSupport.unpark(excuseT);
         }, "监控线程");
-        excuseT=new Thread(()->{
+        excuseT = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 lockSupportTest.add(i);
                 System.out.println(i);
-                if(lockSupportTest.size()==5){
+                if (lockSupportTest.size() == 5) {
                     LockSupport.unpark(monitorT);
                     LockSupport.park();
                 }

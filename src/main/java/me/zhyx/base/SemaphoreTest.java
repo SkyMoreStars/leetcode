@@ -8,21 +8,21 @@ import java.util.concurrent.Semaphore;
  **/
 public class SemaphoreTest {
     public static void main(String[] args) {
-        Semaphore semaphore=new Semaphore(5,true);
+        Semaphore semaphore = new Semaphore(5, true);
         for (int i = 0; i < 50; i++) {
-            new Thread(()->{
+            new Thread(() -> {
                 try {
                     semaphore.acquire();
-                    System.out.println(Thread.currentThread().getName()+"running!");
+                    System.out.println(Thread.currentThread().getName() + "running!");
                     Thread.sleep(100);
-                    System.out.println(Thread.currentThread().getName()+"over!");
+                    System.out.println(Thread.currentThread().getName() + "over!");
                     System.out.println();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     semaphore.release();
                 }
-            },"线程"+i).start();
+            }, "线程" + i).start();
         }
     }
 }

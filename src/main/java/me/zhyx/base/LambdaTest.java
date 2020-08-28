@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  * @date: 2020-07-07 01:48
  **/
 public class LambdaTest {
-    private static class Person{
+    private static class Person {
         private String name;
         private int age;
 
@@ -31,6 +31,7 @@ public class LambdaTest {
             return this;
         }
     }
+
     private List<Person> personlist;
 
     private List<Person> makepersonlist() {
@@ -62,15 +63,16 @@ public class LambdaTest {
             System.out.println(name);
         }
     }
+
     public void filterWithStreamAndLambda() {
         //TODO: 补充代码
         List<String> nameList = new ArrayList<>();
 
-        makepersonlist().stream().filter(person ->  {
-                if(person.age>30){
-                    return true;
-                }
-                return false;
+        makepersonlist().stream().filter(person -> {
+            if (person.age > 30) {
+                return true;
+            }
+            return false;
         }).forEach(item -> {
             nameList.add(item.name);
         });

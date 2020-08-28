@@ -14,8 +14,8 @@ public class ArrayListRemove {
         HashSet<String> strings = new HashSet<>();
         strings.add(null);
         TreeMap<String, String> stringStringTreeMap = new TreeMap<>();
-        stringStringTreeMap.put("2","3");
-        stringStringTreeMap.put("4","5");
+        stringStringTreeMap.put("2", "3");
+        stringStringTreeMap.put("4", "5");
         for (Map.Entry<String, String> value : stringStringTreeMap.entrySet()) {
             System.out.println(value.getKey());
         }

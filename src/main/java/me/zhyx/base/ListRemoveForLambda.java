@@ -14,9 +14,9 @@ public class ListRemoveForLambda {
         ArrayList<String> strings = new ArrayList<>();
         strings.add("test");
         strings.add("werwer");
-        Iterator<String> iterator= strings.iterator();
-        while (iterator.hasNext()){
-            String str=iterator.next();
+        Iterator<String> iterator = strings.iterator();
+        while (iterator.hasNext()) {
+            String str = iterator.next();
             iterator.remove();
         }
         System.out.println(Arrays.toString(strings.toArray()));

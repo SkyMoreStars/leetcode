@@ -14,12 +14,13 @@ public class Container1<T> {
     final private int MAX = 10;
     private int count = 0;
     private Lock lock = new ReentrantLock();
-    private Condition producer=lock.newCondition();
-    private Condition consumer=lock.newCondition();
-    public void put(T t){
+    private Condition producer = lock.newCondition();
+    private Condition consumer = lock.newCondition();
+
+    public void put(T t) {
         lock.lock();
-        try{
-            while (linkedList.size()==MAX){
+        try {
+            while (linkedList.size() == MAX) {
                 producer.await();
             }
             linkedList.add(t);
@@ -27,24 +28,24 @@ public class Container1<T> {
             consumer.signalAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
 
-    public T get(){
+    public T get() {
         lock.lock();
-        try{
-            while (linkedList.size()==0){
+        try {
+            while (linkedList.size() == 0) {
                 consumer.await();
             }
-            T t= linkedList.removeFirst();
+            T t = linkedList.removeFirst();
             --count;
             producer.signalAll();
             return t;
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             lock.unlock();
         }
         throw new RuntimeException();
@@ -65,12 +66,12 @@ public class Container1<T> {
         product1.start();
         product2.start();
         for (int i = 0; i < 10; i++) {
-            new Thread(()->{
-                while (true){
+            new Thread(() -> {
+                while (true) {
                     Object o = objectContainer.get();
                     System.out.println(o.toString());
                 }
-            },"consumer"+i).start();
+            }, "consumer" + i).start();
         }
     }
 }

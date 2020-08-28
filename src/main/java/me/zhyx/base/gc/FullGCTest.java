@@ -31,13 +31,13 @@ public class FullGCTest {
     public static void main(String[] args) throws Exception {
         executor.setMaximumPoolSize(50);
 
-        for (;;){
+        for (; ; ) {
             modelFit();
             Thread.sleep(100);
         }
     }
 
-    private static void modelFit(){
+    private static void modelFit() {
         List<CardInfo> taskList = getAllCardInfo();
         taskList.forEach(info -> {
             // do something
@@ -49,7 +49,7 @@ public class FullGCTest {
         });
     }
 
-    private static List<CardInfo> getAllCardInfo(){
+    private static List<CardInfo> getAllCardInfo() {
         List<CardInfo> taskList = new ArrayList<>();
 
         for (int i = 0; i < 100; i++) {

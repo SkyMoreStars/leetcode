@@ -11,21 +11,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ThreadPoolTest {
 
-    private static class ThreadA implements Runnable{
+    private static class ThreadA implements Runnable {
 
         @Override
         public void run() {
-            while (true){
+            while (true) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(Thread.currentThread().getName()+" start running");
+                System.out.println(Thread.currentThread().getName() + " start running");
             }
         }
     }
-    private static class ThreadItem implements ThreadFactory{
+
+    private static class ThreadItem implements ThreadFactory {
         /**
          * 线程池编号
          */
@@ -41,15 +42,15 @@ public class ThreadPoolTest {
         /**
          * 线程池的线程名称前缀
          */
-        public  final String namePrefix;
+        public final String namePrefix;
 
         private ThreadItem(String name) {
             SecurityManager s = System.getSecurityManager();
-            threadGroup = (s != null) ? s.getThreadGroup() :Thread.currentThread().getThreadGroup();
-            if (null==name || "".equals(name.trim())){
+            threadGroup = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+            if (null == name || "".equals(name.trim())) {
                 name = "pool";
             }
-            namePrefix = name +"-"+
+            namePrefix = name + "-" +
                     poolNumber.getAndIncrement() +
                     "-thread-";
         }
@@ -57,23 +58,24 @@ public class ThreadPoolTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread t = new Thread(threadGroup, r,namePrefix + threadNumber.getAndIncrement(),0);
-            if (t.isDaemon()){
+            Thread t = new Thread(threadGroup, r, namePrefix + threadNumber.getAndIncrement(), 0);
+            if (t.isDaemon()) {
                 t.setDaemon(false);
             }
-            if (t.getPriority() != Thread.NORM_PRIORITY){
+            if (t.getPriority() != Thread.NORM_PRIORITY) {
                 t.setPriority(Thread.NORM_PRIORITY);
             }
             return t;
         }
     }
+
     public static void main(String[] args) {
         ThreadFactory threadItem = new ThreadItem("测试");
         BlockingQueue<Runnable> threadAS = new LinkedBlockingQueue<>(10);
         ThreadPoolExecutor.CallerRunsPolicy callerRunsPolicy = new ThreadPoolExecutor.CallerRunsPolicy();
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4,6,3L,TimeUnit.HOURS,threadAS,threadItem,callerRunsPolicy);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4, 6, 3L, TimeUnit.HOURS, threadAS, threadItem, callerRunsPolicy);
 
-        for(int i=0;i<18;i++){
+        for (int i = 0; i < 18; i++) {
             ThreadA threadA = new ThreadA();
             threadPoolExecutor.execute(threadA);
         }

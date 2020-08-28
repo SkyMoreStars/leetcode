@@ -8,14 +8,15 @@ package me.zhyx.base.jvm;
  * 2：使用jstack+ pid打印出堆栈信息。通过waiting lock可以分析出哪个线程持有了这把锁。
  **/
 public class DealLockTest {
-    private static class A{
+    private static class A {
 
     }
 
-    private static class B{
+    private static class B {
 
     }
-    private static class Thread1 implements Runnable{
+
+    private static class Thread1 implements Runnable {
         private A a;
         private B b;
 
@@ -26,11 +27,11 @@ public class DealLockTest {
 
         @Override
         public void run() {
-            synchronized (a){
+            synchronized (a) {
                 try {
-                    System.out.println(Thread.currentThread().getName()+"lock a finish");
+                    System.out.println(Thread.currentThread().getName() + "lock a finish");
                     Thread.sleep(100);
-                    synchronized (b){
+                    synchronized (b) {
                         System.out.println("start do something");
                     }
                 } catch (InterruptedException e) {
@@ -40,7 +41,7 @@ public class DealLockTest {
         }
     }
 
-    private static  class Thread2 implements Runnable{
+    private static class Thread2 implements Runnable {
         private A a;
         private B b;
 
@@ -51,11 +52,11 @@ public class DealLockTest {
 
         @Override
         public void run() {
-            synchronized (b){
+            synchronized (b) {
                 try {
-                    System.out.println(Thread.currentThread().getName()+"lock b finish");
+                    System.out.println(Thread.currentThread().getName() + "lock b finish");
                     Thread.sleep(100);
-                    synchronized (a){
+                    synchronized (a) {
                         System.out.println("start do something");
                     }
                 } catch (InterruptedException e) {
@@ -70,7 +71,7 @@ public class DealLockTest {
         B b = new B();
         Thread1 thread1 = new Thread1(a, b);
         Thread2 thread2 = new Thread2(a, b);
-        new Thread(thread1,"线程1").start();
-        new Thread(thread2,"线程2").start();
+        new Thread(thread1, "线程1").start();
+        new Thread(thread2, "线程2").start();
     }
 }

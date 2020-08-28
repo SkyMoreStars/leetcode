@@ -3,7 +3,7 @@ package me.zhyx.base;
 /**
  * @author: yx.zh
  * @date: 2020-06-20 13:55
- *  静态代理demo
+ * 静态代理demo
  **/
 @FunctionalInterface
 public interface Merry {
@@ -12,14 +12,15 @@ public interface Merry {
      */
     void wedding();
 }
-class You implements Merry{
+
+class You implements Merry {
     @Override
     public void wedding() {
         System.out.println("我要结婚了，我只负责结婚。其他事情别人帮我来办理！");
     }
 }
 
-class MerryCompany implements Merry{
+class MerryCompany implements Merry {
     private Merry target;
 
     public MerryCompany(Merry target) {

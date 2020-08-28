@@ -6,14 +6,13 @@ import java.util.concurrent.CyclicBarrier;
 /**
  * @auther zhyx
  * @Date 2020/6/19 11:19
- * @Description
- * 所有线程都到达，然后继续执行，计数器递增，提供reset功能，可以多次使用
+ * @Description 所有线程都到达，然后继续执行，计数器递增，提供reset功能，可以多次使用
  */
 public class CyclicBarrierTest {
     private int a;
     private int b;
 
-    static class Thread1 implements Runnable{
+    static class Thread1 implements Runnable {
         CyclicBarrier cyclicBarrier;
         CyclicBarrierTest cyclicBarrierTest;
 
@@ -24,7 +23,7 @@ public class CyclicBarrierTest {
 
         @Override
         public void run() {
-            System.out.println(Thread.currentThread().getName()+"执行");
+            System.out.println(Thread.currentThread().getName() + "执行");
             cyclicBarrierTest.setA(3);
             try {
                 cyclicBarrier.await();
@@ -37,7 +36,7 @@ public class CyclicBarrierTest {
         }
     }
 
-    static class Thread2 implements Runnable{
+    static class Thread2 implements Runnable {
         CyclicBarrier cyclicBarrier;
         CyclicBarrierTest cyclicBarrierTest;
 
@@ -49,7 +48,7 @@ public class CyclicBarrierTest {
         @Override
         public void run() {
 
-            System.out.println(Thread.currentThread().getName()+"执行");
+            System.out.println(Thread.currentThread().getName() + "执行");
             cyclicBarrierTest.setB(4);
             try {
                 cyclicBarrier.await();
@@ -61,12 +60,13 @@ public class CyclicBarrierTest {
 
         }
     }
+
     public static void main(String[] args) {
         final CyclicBarrierTest cyclicBarrierTest = new CyclicBarrierTest();
         CyclicBarrier cyclicBarrier = new CyclicBarrier(2, new Runnable() {
             @Override
             public void run() {
-                System.out.println(cyclicBarrierTest.sum(cyclicBarrierTest.a, cyclicBarrierTest.b)+"完成任务！");
+                System.out.println(cyclicBarrierTest.sum(cyclicBarrierTest.a, cyclicBarrierTest.b) + "完成任务！");
             }
         });
         Thread1 thread1 = new Thread1(cyclicBarrier, cyclicBarrierTest);
@@ -95,7 +95,7 @@ public class CyclicBarrierTest {
         return this;
     }
 
-    public int sum(int a, int b){
-        return a+b;
+    public int sum(int a, int b) {
+        return a + b;
     }
 }

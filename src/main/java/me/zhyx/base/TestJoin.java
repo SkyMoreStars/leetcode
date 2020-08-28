@@ -4,11 +4,11 @@ package me.zhyx.base;
  * @author: yx.zh
  * @date: 2020-06-20 16:02
  **/
-public class TestJoin implements Runnable{
+public class TestJoin implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-            System.out.println("线程vip来了"+i);
+            System.out.println("线程vip来了" + i);
         }
     }
 
@@ -17,7 +17,7 @@ public class TestJoin implements Runnable{
         thread.start();
         for (int i = 0; i < 1000; i++) {
             System.out.println(i);
-            if(i==200){
+            if (i == 200) {
                 thread.join();
             }
         }

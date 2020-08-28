@@ -16,15 +16,18 @@ public class InstanceProcess {
 }
 
 class A {
-    public volatile static int I=0;
-    public String test="hello moc moc";
+    public volatile static int I = 0;
+    public String test = "hello moc moc";
+
     static {
         System.out.println("Static");
     }
+
     public A() {
         System.out.println("A");
     }
-    public synchronized void m(){
+
+    public synchronized void m() {
         System.out.println("B");
     }
 }

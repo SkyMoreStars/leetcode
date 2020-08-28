@@ -13,29 +13,30 @@ public class ReentantLockDemo implements Lock {
     /**
      * 是否持有锁
      */
-    private volatile boolean isHoldLock=false;
+    private volatile boolean isHoldLock = false;
     /**
      * 记录获得锁的线程
      */
-    Thread currentThread=null;
+    Thread currentThread = null;
     /**
-     *记录获得锁的线程的重入次数
+     * 记录获得锁的线程的重入次数
      */
-    private volatile int num=0;
+    private volatile int num = 0;
+
     @Override
     public synchronized void lock() {
-        System.out.println("线程"+Thread.currentThread().getName()+"开始获得锁");
-        if(isHoldLock&&currentThread!=Thread.currentThread()){
+        System.out.println("线程" + Thread.currentThread().getName() + "开始获得锁");
+        if (isHoldLock && currentThread != Thread.currentThread()) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        currentThread=Thread.currentThread();
-        System.out.println("线程"+Thread.currentThread().getName()+"第一次获得锁");
-        if(num!=0){
-            System.out.println("线程"+Thread.currentThread().getName()+"重入锁"+(num+1));
+        currentThread = Thread.currentThread();
+        System.out.println("线程" + Thread.currentThread().getName() + "第一次获得锁");
+        if (num != 0) {
+            System.out.println("线程" + Thread.currentThread().getName() + "重入锁" + (num + 1));
         }
         num++;
 
@@ -58,13 +59,13 @@ public class ReentantLockDemo implements Lock {
 
     @Override
     public synchronized void unlock() {
-        if(Thread.currentThread()==currentThread){
-            System.out.println("线程"+Thread.currentThread().getName()+"释放锁，第"+num+"次释放");
+        if (Thread.currentThread() == currentThread) {
+            System.out.println("线程" + Thread.currentThread().getName() + "释放锁，第" + num + "次释放");
             num--;
-            if(num==0){
-                System.out.println("线程"+Thread.currentThread().getName()+"释放锁完毕");
+            if (num == 0) {
+                System.out.println("线程" + Thread.currentThread().getName() + "释放锁完毕");
                 notify();
-                isHoldLock=false;
+                isHoldLock = false;
             }
         }
     }

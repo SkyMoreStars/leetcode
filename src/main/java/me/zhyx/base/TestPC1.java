@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  **/
 public class TestPC1 {
     public static void main(String[] args) {
-        ExecutorService executorService= Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newCachedThreadPool();
         TV tv = new TV();
         new Player(tv).start();
         new Watcher(tv).start();
@@ -20,7 +20,7 @@ public class TestPC1 {
 /**
  * 演员
  */
-class Player extends Thread{
+class Player extends Thread {
     TV tv;
 
     public Player(TV tv) {
@@ -32,9 +32,9 @@ class Player extends Thread{
         for (int i = 0; i < 100; i++) {
             try {
 
-                if(i%2==0){
+                if (i % 2 == 0) {
                     tv.play("快乐大本营！");
-                }else {
+                } else {
                     tv.play("广告！");
                 }
             } catch (InterruptedException e) {
@@ -48,7 +48,7 @@ class Player extends Thread{
 /**
  * 观众
  */
-class Watcher extends Thread{
+class Watcher extends Thread {
     TV tv;
 
     public Watcher(TV tv) {
@@ -77,27 +77,29 @@ class TV {
      */
 
     String voice;
-    boolean flag=true;
+    boolean flag = true;
+
     public synchronized void play(String voice) throws InterruptedException {
-        if(!flag){
+        if (!flag) {
             wait();
         }
-        System.out.println("演员表演了："+voice);
+        System.out.println("演员表演了：" + voice);
         this.notifyAll();
-        this.voice=voice;
-        this.flag=!this.flag;
+        this.voice = voice;
+        this.flag = !this.flag;
 
     }
+
     /**
      * 观众看节目
      */
     public synchronized void watch() throws InterruptedException {
-        if(flag){
+        if (flag) {
             wait();
         }
-        System.out.println("观众观看了："+this.voice);
+        System.out.println("观众观看了：" + this.voice);
         this.notifyAll();
-        this.flag=!this.flag;
+        this.flag = !this.flag;
 
     }
 }

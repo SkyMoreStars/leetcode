@@ -6,10 +6,11 @@ package me.zhyx.base;
  * 会爆空指针
  **/
 public class SynchronizedIsNull implements Runnable {
-    private Integer count=0;
-    private Object nullObj=null;
-    public void Test(){
-        synchronized (nullObj){
+    private Integer count = 0;
+    private Object nullObj = null;
+
+    public void Test() {
+        synchronized (nullObj) {
             count++;
             System.out.println(count);
         }
@@ -19,7 +20,8 @@ public class SynchronizedIsNull implements Runnable {
     public void run() {
         Test();
     }
-    private static class Test{
+
+    private static class Test {
         public static void main(String[] args) {
             SynchronizedIsNull synchronizedIsNull = new SynchronizedIsNull();
             for (int i = 0; i < 40; i++) {

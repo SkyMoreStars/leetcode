@@ -5,14 +5,13 @@ package me.zhyx.base;
  * @date: 2020-06-21 08:09
  * synchronized死锁demo
  * 两个女孩要化妆，都需要镜子和口红。
- *
  **/
 public class SyncDealLock {
     public static void main(String[] args) {
         Lipstick lipstick = new Lipstick();
         Mirror mirror = new Mirror();
-        new Thread(new MakeUp(mirror,lipstick),"girl1").start();
-        new Thread(new MakeUp(mirror,lipstick),"girl2").start();
+        new Thread(new MakeUp(mirror, lipstick), "girl1").start();
+        new Thread(new MakeUp(mirror, lipstick), "girl2").start();
     }
 
 }
@@ -20,18 +19,18 @@ public class SyncDealLock {
 /**
  * 镜子
  */
-class Mirror{
+class Mirror {
 
 }
 
 /**
  * 口红
  */
-class Lipstick{
+class Lipstick {
 
 }
 
-class MakeUp implements Runnable{
+class MakeUp implements Runnable {
     Mirror mirror;
     Lipstick lipstick;
 
@@ -46,8 +45,8 @@ class MakeUp implements Runnable{
          * 模拟两个女孩先一个先拿镜子，一个先拿口红的场景
          * 互相等待对方把镜子/口红用完
          */
-        if(Thread.currentThread().getName().equals("girl1")){
-            synchronized (mirror){
+        if (Thread.currentThread().getName().equals("girl1")) {
+            synchronized (mirror) {
                 System.out.println("girl1 拿到镜子");
                 System.out.println("girl1 开始拿口红");
                 try {
@@ -55,13 +54,13 @@ class MakeUp implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                synchronized (lipstick){
+                synchronized (lipstick) {
                     System.out.println("girl1开始化妆");
                 }
             }
         }
-        if(Thread.currentThread().getName().equals("girl2")){
-            synchronized (lipstick){
+        if (Thread.currentThread().getName().equals("girl2")) {
+            synchronized (lipstick) {
                 System.out.println("girl2 拿到口红");
                 System.out.println("girl2 开始拿镜子");
                 try {
@@ -69,7 +68,7 @@ class MakeUp implements Runnable{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                synchronized (mirror){
+                synchronized (mirror) {
                     System.out.println("girl2开始化妆");
                 }
             }

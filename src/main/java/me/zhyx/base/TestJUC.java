@@ -10,15 +10,15 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class TestJUC {
     public static void main(String[] args) throws InterruptedException {
-        final ConcurrentHashMap<String,String> strings = new ConcurrentHashMap<>();
+        final ConcurrentHashMap<String, String> strings = new ConcurrentHashMap<>();
         List<Thread> threadArrayList = new ArrayList<Thread>();
         for (int i = 0; i < 100000; i++) {
             Thread thread = new Thread(() -> {
-                strings.put(Thread.currentThread().getName(),"");
+                strings.put(Thread.currentThread().getName(), "");
             });
             threadArrayList.add(thread);
         }
-        threadArrayList.stream().forEach(t->{
+        threadArrayList.stream().forEach(t -> {
             t.start();
             try {
                 t.join();

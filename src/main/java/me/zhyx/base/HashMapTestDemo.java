@@ -14,10 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class HashMapTestDemo {
 
     public static void main(String[] args) {
-        String s2=new String("1234");
+        String s2 = new String("1234");
         s2 = s2.intern();
-        String s1="1234";
+        String s1 = "1234";
 
-        System.out.println(s1==s2);
+        System.out.println(s1 == s2);
     }
 }

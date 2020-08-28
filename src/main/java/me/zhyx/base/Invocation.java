@@ -11,6 +11,6 @@ import java.lang.reflect.Method;
 public class Invocation implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(proxy,args);
+        return method.invoke(proxy, args);
     }
 }

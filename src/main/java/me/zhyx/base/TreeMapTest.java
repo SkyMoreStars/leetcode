@@ -9,7 +9,7 @@ import java.util.TreeMap;
  * @Description
  */
 public class TreeMapTest {
-    private static class Student implements Comparable<Student>{
+    private static class Student implements Comparable<Student> {
         private Integer studyNo;
         private String name;
 
@@ -43,9 +43,9 @@ public class TreeMapTest {
 
         @Override
         public int compareTo(Student o) {
-            if(this.studyNo>o.studyNo){
+            if (this.studyNo > o.studyNo) {
                 return 1;
-            }else {
+            } else {
                 return 0;
             }
         }
@@ -65,12 +65,12 @@ public class TreeMapTest {
         Student 李四 = new Student().setName("李四").setStudyNo(4);
         Student 王五 = new Student().setName("王五").setStudyNo(5);
         Student 赵六 = new Student().setName("赵六").setStudyNo(6);
-        studentStringTreeMap.put(张三,"1");
-        studentStringTreeMap.put(李四,"2");
-        studentStringTreeMap.put(王五,"3");
-        studentStringTreeMap.put(赵六,"4");
+        studentStringTreeMap.put(张三, "1");
+        studentStringTreeMap.put(李四, "2");
+        studentStringTreeMap.put(王五, "3");
+        studentStringTreeMap.put(赵六, "4");
         for (Map.Entry<Student, String> studentStringEntry : studentStringTreeMap.entrySet()) {
-            System.out.println(studentStringEntry.getKey()+"<===>"+studentStringEntry.getValue());
+            System.out.println(studentStringEntry.getKey() + "<===>" + studentStringEntry.getValue());
         }
 
         System.out.println("==================================");
@@ -78,7 +78,7 @@ public class TreeMapTest {
         String replace = studentStringTreeMap.replace(张三, "1234");
         System.out.println(replace);
         for (Map.Entry<Student, String> studentStringEntry : studentStringTreeMap.entrySet()) {
-            System.out.println(studentStringEntry.getKey()+"<===>"+studentStringEntry.getValue());
+            System.out.println(studentStringEntry.getKey() + "<===>" + studentStringEntry.getValue());
         }
     }
 }

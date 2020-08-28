@@ -12,8 +12,8 @@ public class HashMapTest {
     }
 
     private static boolean comparator() {
-        float a= 10.0f-9.0f;
-        float b= 8.0f/2.0f;
+        float a = 10.0f - 9.0f;
+        float b = 8.0f / 2.0f;
 
         System.out.println(b);
 //        if(a==b){

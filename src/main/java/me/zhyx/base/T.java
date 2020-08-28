@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
  */
 public class T {
     public final int value;
+
     public T(int value) {
         this.value = value;
     }
@@ -16,11 +17,12 @@ public class T {
     public int getValue() {
         return value;
     }
+
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         T t = new T(1);
         Field value = T.class.getDeclaredField("value");
         value.setAccessible(true);
-        value.setInt(t,4);
+        value.setInt(t, 4);
         System.out.println(t.value);
     }
 

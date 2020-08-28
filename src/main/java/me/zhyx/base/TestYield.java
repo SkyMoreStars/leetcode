@@ -6,17 +6,18 @@ package me.zhyx.base;
  **/
 public class TestYield {
     public static void main(String[] args) {
-        new Thread(new MyYield(),"a").start();
-        new Thread(new MyYield(),"b").start();
+        new Thread(new MyYield(), "a").start();
+        new Thread(new MyYield(), "b").start();
 
     }
 }
-class MyYield implements Runnable{
+
+class MyYield implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName()+"开始执行");
+        System.out.println(Thread.currentThread().getName() + "开始执行");
         Thread.yield();
-        System.out.println(Thread.currentThread().getName()+"执行结束");
+        System.out.println(Thread.currentThread().getName() + "执行结束");
     }
 }

@@ -8,12 +8,12 @@ import java.util.LinkedList;
  * @date: 2020-08-28 07:17
  **/
 public class Container<T> {
-    final private LinkedList<T> lists=new LinkedList<>();
-    final private int MAX =10;
-    private int count=0;
+    final private LinkedList<T> lists = new LinkedList<>();
+    final private int MAX = 10;
+    private int count = 0;
 
-    public synchronized void put(T o){
-        while (lists.size()==MAX){
+    public synchronized void put(T o) {
+        while (lists.size() == MAX) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
@@ -24,8 +24,9 @@ public class Container<T> {
         ++count;
         this.notifyAll();
     }
-    public synchronized T get(){
-        while (lists.size()==0){
+
+    public synchronized T get() {
+        while (lists.size() == 0) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
@@ -54,12 +55,12 @@ public class Container<T> {
         product1.start();
         product2.start();
         for (int i = 0; i < 10; i++) {
-            new Thread(()->{
-                while (true){
+            new Thread(() -> {
+                while (true) {
                     Object o = objectContainer.get();
                     System.out.println(o.toString());
                 }
-            },"consumer"+i).start();
+            }, "consumer" + i).start();
         }
     }
 }

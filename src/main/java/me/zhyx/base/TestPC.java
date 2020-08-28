@@ -12,10 +12,11 @@ public class TestPC {
 
     }
 }
+
 /**
  * 产品
  */
-class Product{
+class Product {
     int id;
     String name;
 
@@ -46,7 +47,7 @@ class Product{
 /**
  * 生产者
  */
-class Producer implements Runnable{
+class Producer implements Runnable {
     ProductContainer productContainer;
 
     public Producer(ProductContainer productContainer) {
@@ -72,12 +73,13 @@ class Producer implements Runnable{
 /**
  * 消费者
  */
-class Consumer implements Runnable{
+class Consumer implements Runnable {
     ProductContainer productContainer;
 
     public Consumer(ProductContainer productContainer) {
         this.productContainer = productContainer;
     }
+
     @Override
     public void run() {
         /**
@@ -86,7 +88,7 @@ class Consumer implements Runnable{
         for (int i = 0; i < 1000; i++) {
             try {
                 Product pop = productContainer.pop();
-                System.out.println("消费了第"+pop.getId()+"个产品");
+                System.out.println("消费了第" + pop.getId() + "个产品");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -97,32 +99,34 @@ class Consumer implements Runnable{
 /**
  * 产品容器
  */
-class ProductContainer{
-    Product [] products=new Product[10];
+class ProductContainer {
+    Product[] products = new Product[10];
     private int count;
+
     public synchronized void push(Product product) throws InterruptedException {
         /**
          * 容器满了通知生产者等待，通知消费者消费
          */
-        if(count==products.length-1){
+        if (count == products.length - 1) {
             System.out.println("仓库满了,等待消费者消费");
             wait();
         }
-        products[count]=product;
-        System.out.println("生产了第"+product.getId()+"个产品");
+        products[count] = product;
+        System.out.println("生产了第" + product.getId() + "个产品");
         count++;
         notifyAll();
     }
 
     /**
      * 消费者消费
+     *
      * @return
      */
     public synchronized Product pop() throws InterruptedException {
         /**
          * 判断能否消费
          */
-        if(count==0){
+        if (count == 0) {
             System.out.println("消费完毕等待生产");
             wait();
         }
@@ -130,8 +134,8 @@ class ProductContainer{
          * 消费
          */
         count--;
-        Product product=products[count];
-            notifyAll();
+        Product product = products[count];
+        notifyAll();
         return product;
 
     }

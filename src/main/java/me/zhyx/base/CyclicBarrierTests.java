@@ -11,17 +11,17 @@ public class CyclicBarrierTests {
     public static void main(String[] args) {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(20);
         for (int i = 0; i < 101; i++) {
-            new Thread(()->{
-                            try {
-                                cyclicBarrier.await();
-                                System.out.println(Thread.currentThread().getName()+"开始跑");
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (BrokenBarrierException e) {
-                                e.printStackTrace();
-                            }
+            new Thread(() -> {
+                try {
+                    cyclicBarrier.await();
+                    System.out.println(Thread.currentThread().getName() + "开始跑");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
 
-                        }, "线程"+i).start();
+            }, "线程" + i).start();
         }
     }
 }

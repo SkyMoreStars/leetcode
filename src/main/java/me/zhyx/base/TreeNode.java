@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  **/
 public class TreeNode {
     private String data;
-    public List<TreeNode> children =new LinkedList<>();
+    public List<TreeNode> children = new LinkedList<>();
 
     public TreeNode(String data) {
         this.data = data;
@@ -18,27 +18,30 @@ public class TreeNode {
     public List<TreeNode> getChildren() {
         return children;
     }
+
     public Optional<String> getData() {
         return (null == this.data) ? Optional.empty() : Optional.of(this.data);
     }
 
 }
-final class TreeUtil{
+
+final class TreeUtil {
     private TreeUtil() {
     }
 
     public static void main(String[] args) {
-        String text=
+        String text =
                 "1\n"
-                +"\t1.1\n"
-                +"\t\t1.1.1\n"
-                +"\t\t1.1.2\n"
-                +"\t1.2"
-                +"2\n"
-                +"\t2.1";
+                        + "\t1.1\n"
+                        + "\t\t1.1.1\n"
+                        + "\t\t1.1.2\n"
+                        + "\t1.2"
+                        + "2\n"
+                        + "\t2.1";
 
         TreeUtil.stringToTree(text);
     }
+
     /**
      * 根据规则将String转换为树（森林），
      * 假设text始终合法（非空且合乎规则）。
@@ -48,7 +51,7 @@ final class TreeUtil{
 
         //TODO: 实现此方法
         String[] treeNodeStr = text.split("\n");
-        List<TreeNode> rootNode= findChildren(treeNodeStr);
+        List<TreeNode> rootNode = findChildren(treeNodeStr);
         return rootNode;
     }
 
@@ -58,14 +61,14 @@ final class TreeUtil{
 
         for (String s : treeNodeStr) {
 
-            if(s.indexOf("\t")>1){
+            if (s.indexOf("\t") > 1) {
                 //判断缩进的大小，变换层级关系。递增则子级，变小则父级。
-                currentTreeNode.getChildren().add(new TreeNode(s.substring(s.indexOf(".")+1)));
-            }else {
+                currentTreeNode.getChildren().add(new TreeNode(s.substring(s.indexOf(".") + 1)));
+            } else {
                 TreeNode rootTreeNode = new TreeNode(s);
-                rootTreeNode.children=new ArrayList<>();
+                rootTreeNode.children = new ArrayList<>();
                 rootTreeNodes.add(rootTreeNode);
-                currentTreeNode=rootTreeNode;
+                currentTreeNode = rootTreeNode;
             }
         }
 
@@ -74,8 +77,8 @@ final class TreeUtil{
 
     private static List<TreeNode> findRootNode(String[] treeNodeStr) {
         ArrayList<TreeNode> rootNode = new ArrayList<>();
-        Arrays.stream(treeNodeStr).forEach(item->{
-            if(!item.contains("\t")){
+        Arrays.stream(treeNodeStr).forEach(item -> {
+            if (!item.contains("\t")) {
                 TreeNode treeNode = new TreeNode(item);
                 rootNode.add(treeNode);
             }

@@ -4,7 +4,7 @@ package me.zhyx.base;
  * @author: yx.zh
  * @date: 2020-06-20 16:17
  **/
-public class ThreadState  {
+public class ThreadState {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -22,11 +22,11 @@ public class ThreadState  {
         String state = thread.getState().toString();
         System.out.println(state);//NEW
         thread.start();
-        state=thread.getState().toString();
+        state = thread.getState().toString();
         System.out.println(state);//RUNNABLE
-        while (!state.equals(Thread.State.TERMINATED.toString())){
+        while (!state.equals(Thread.State.TERMINATED.toString())) {
             Thread.sleep(100);
-            state=thread.getState().toString();
+            state = thread.getState().toString();
             System.out.println(state);
         }
 

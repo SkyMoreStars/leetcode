@@ -13,13 +13,13 @@ public class SoftReferenceTest {
         SoftReference<byte[]> softReference = new SoftReference<>(new byte[1024 * 1024 * 10]);
         System.out.println(softReference.get());
         System.gc();
-        try{
+        try {
             Thread.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(softReference.get());
-        byte[] b=new byte[1024*1024*10];
+        byte[] b = new byte[1024 * 1024 * 10];
         System.out.println(softReference.get());
     }
 }

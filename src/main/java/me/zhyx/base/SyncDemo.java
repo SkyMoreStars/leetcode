@@ -5,7 +5,7 @@ package me.zhyx.base;
  * @date: 2020-06-21 08:02
  **/
 public class SyncDemo {
-    public synchronized void print(){
+    public synchronized void print() {
         System.out.println(Thread.currentThread().getName());
         printf();
     }

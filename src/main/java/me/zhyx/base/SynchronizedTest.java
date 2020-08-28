@@ -7,7 +7,7 @@ package me.zhyx.base;
 public class SynchronizedTest {
     private static class Test {
 
-        public synchronized void first(){
+        public synchronized void first() {
             System.out.println("开始跑第一个方法");
             try {
                 Thread.sleep(1000);
@@ -17,7 +17,8 @@ public class SynchronizedTest {
             System.out.println("开始跑第一个方法完成");
 
         }
-        public void second(){
+
+        public void second() {
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
@@ -29,8 +30,8 @@ public class SynchronizedTest {
 
     public static void main(String[] args) throws InterruptedException {
         Test test = new Test();
-       new Thread(test::first,"test").start();
-       new Thread(test::second,"test1").start();
-       Thread.sleep(50000);
+        new Thread(test::first, "test").start();
+        new Thread(test::second, "test1").start();
+        Thread.sleep(50000);
     }
 }
